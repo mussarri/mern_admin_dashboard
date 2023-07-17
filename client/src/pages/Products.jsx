@@ -57,13 +57,13 @@ function Products() {
         <Box px={1} mb={2} display={"flex"} justifyContent={"space-between"}>
           <Typography variant="h2">Products</Typography>
           <FormControl size="small">
-            <InputLabel id="demo-simple-select-label">Filter</InputLabel>
+            <InputLabel id="demo-simple-select-label">Sort</InputLabel>
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
-              label="Filter"
+              label="Sort"
               value={filter}
-              sx={{ width: 100 }}
+              sx={{ width: 90 }}
               onChange={(e) => setFilter(e.target.value)}
             >
               <MenuItem value={"name"}>Name</MenuItem>
