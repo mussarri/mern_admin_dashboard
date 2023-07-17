@@ -1,21 +1,36 @@
 import "./App.css";
-import { CssBaseline } from "@mui/material";
+import { CssBaseline, ThemeProvider } from "@mui/material";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Layout from "./pages/Layout.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
+import { themeSettings } from "./theme.js";
+import { useSelector } from "react-redux";
+import { createTheme } from "@mui/material";
+import Products from "./pages/Products.jsx";
+import Customers from "./pages/Customers.jsx";
+import Transactions from "./pages/Transactions.jsx";
+import Geography from "./pages/Geography.jsx";
 
 function App() {
+  const mode = useSelector((state) => state.mode.value);
+  const theme = createTheme(themeSettings(mode));
   return (
     <>
-      <BrowserRouter>
-        <CssBaseline />
-        <Routes>
-          <Route element={<Layout />}>
-            <Route path="/" element={<Navigate to="/dashboard" replace />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      <ThemeProvider theme={theme}>
+        <BrowserRouter>
+          <CssBaseline />
+          <Routes>
+            <Route element={<Layout />}>
+              <Route path="/" element={<Navigate to="/dashboard" replace />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/products" element={<Products />} />
+              <Route path="/customers" element={<Customers />} />
+              <Route path="/transactions" element={<Transactions />} />
+              <Route path="/geography" element={<Geography />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </ThemeProvider>
     </>
   );
 }

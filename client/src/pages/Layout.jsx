@@ -1,21 +1,21 @@
 import React, { useState } from "react";
-import { Grid,  } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import { Outlet } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 
-
-
 const Layout = () => {
+  const [isOpen, setIsOpen] = useState(true);
+
   return (
     <>
       <Grid container>
-        <Grid xs={2}>
-          <Sidebar />
-        </Grid>
-        <Grid xs={10}>
-          <Navbar />
-          <Outlet />
+        <Sidebar isOpen={isOpen} setIsOpen={setIsOpen}  />
+        <Grid flexGrow={1}>
+          <Navbar setIsOpen={setIsOpen} isOpen={isOpen} />
+          <Box p={4}>
+            <Outlet />
+          </Box>
         </Grid>
       </Grid>
     </>

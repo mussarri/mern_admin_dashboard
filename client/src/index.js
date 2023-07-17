@@ -1,17 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App.js";
-import { themeSettings } from "./theme.js";
-import { ThemeProvider, createTheme } from "@mui/material";
+import { Provider } from "react-redux";
 
-const theme = createTheme(themeSettings('dark'));
+import App from "./App.js";
+import store from "./redux/store.js";
+
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <ThemeProvider theme={theme}>
+    <Provider store={store}>
       <App />
-    </ThemeProvider>
+    </Provider>
   </React.StrictMode>
 );
 
