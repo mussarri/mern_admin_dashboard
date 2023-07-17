@@ -80,7 +80,7 @@ function ResponsiveAppBar({ isOpen, setIsOpen }) {
   }));
 
   return (
-    <AppBar position="static" sx={{ background: theme.palette.primary.dark }}>
+    <AppBar position="sticky" sx={{ background: theme.palette.primary.dark }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters sx={{ justifyContent: "space-between" }}>
           <Box sx={{ display: "flex" }}>

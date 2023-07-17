@@ -10,13 +10,16 @@ const Layout = () => {
   return (
     <>
       <Grid container>
-        <Sidebar isOpen={isOpen} setIsOpen={setIsOpen}  />
-        <Grid flexGrow={1}>
-          <Navbar setIsOpen={setIsOpen} isOpen={isOpen} />
+        <Sidebar isOpen={isOpen} setIsOpen={setIsOpen} />
+        <Box flex={1} sx={{ maxHeight: "100vh", overflowY: "scroll" }}>
+          <Navbar
+            setIsOpen={setIsOpen}
+            isOpen={isOpen}
+          />
           <Box p={4}>
             <Outlet />
           </Box>
-        </Grid>
+        </Box>
       </Grid>
     </>
   );
