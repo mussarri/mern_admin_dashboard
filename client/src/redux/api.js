@@ -7,13 +7,34 @@ export const api = createApi({
   endpoints: (builder) => ({
     getProducts: builder.query({
       query: () => "client/products",
-      providesTags: ["Product"],
+      providesTags: ["Product", "User", "Location", "Transaction"],
     }),
     getCustomers: builder.query({
-      query: () => "client/customers",
+      query: ({ page, pageSize }) => ({
+        url: "client/customers",
+        method: "GET",
+        params: { page, pageSize },
+      }),
       providesTags: ["User"],
+    }),
+    getTransactions: builder.query({
+      query: ({ page, pageSize }) => ({
+        url: "client/transactions",
+        method: "GET",
+        params: { page, pageSize },
+      }),
+      providesTags: ["Transaction"],
+    }),
+    getLocations: builder.query({
+      query: () => "client/locations",
+      providesTags: ["Location"],
     }),
   }),
 });
 
-export const { useGetProductsQuery, useGetCustomersQuery } = api;
+export const {
+  useGetProductsQuery,
+  useGetCustomersQuery,
+  useGetTransactionsQuery,
+  useGetLocationsQuery
+} = api;
