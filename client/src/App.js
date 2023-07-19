@@ -10,6 +10,7 @@ import Products from "./pages/Products.jsx";
 import Customers from "./pages/Customers.jsx";
 import Transactions from "./pages/Transactions.jsx";
 import Geography from "./pages/Geography.jsx";
+import Overview from "pages/Overview";
 
 function App() {
   const mode = useSelector((state) => state.mode.value);
@@ -27,6 +28,7 @@ function App() {
               <Route path="/customers" element={<Customers />} />
               <Route path="/transactions" element={<Transactions />} />
               <Route path="/geography" element={<Geography />} />
+              <Route path="/overview" element={<Overview />} />
             </Route>
           </Routes>
         </BrowserRouter>

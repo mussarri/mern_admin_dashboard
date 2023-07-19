@@ -6,6 +6,7 @@ import { dirname } from "path";
 import { fileURLToPath } from "url";
 import "dotenv/config";
 import clientRoutes from "./routes/client.js";
+import salesRoutes from "./routes/sales.js";
 
 const __filename = fileURLToPath(import.meta.url);
 
@@ -29,6 +30,9 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use("/client", clientRoutes);
+app.use("/sales", salesRoutes);
+
+
 
 app.listen(4000, () => {
   console.log(`app listening on port ${4000}`);
