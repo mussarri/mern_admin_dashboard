@@ -6,24 +6,24 @@ import { Box } from "@mui/material";
 function OverviewChart({ isDashboard = false, view }) {
   const { isLoading, isError, data } = useGetSalesQuery();
 
-  const generateLineData = (arr) => {
-    return arr.map(function (item) {
-      return {
-        x: [item.month],
-        y: [view === "sales" ? item.totalSales : item.totalUnits],
-      };
-    });
-  };
-
   if (isLoading) return <div>Loading</div>;
   if (isError) return <div>Error</div>;
   if (data) {
-    const monthlyData = generateLineData(data.monthlyData);
+    const lineData = [];
+    data.monthlyData.reduce((acc, { month, totalSales, totalUnits }) => {
+      const row = {
+        x: month,
+        y: view === "sales" ? acc + totalSales : acc + totalUnits,
+      };
+      lineData.push(row);
+      return acc + totalSales;
+    }, 0);
+    console.log(lineData);
     const totalSales = [
       {
         id: view === "sales" ? "totalSales" : "totalUnits",
         color: "hsl(84, 70%, 10%)",
-        data: monthlyData,
+        data: lineData,
       },
     ];
 
@@ -40,6 +40,8 @@ function OverviewChart({ isDashboard = false, view }) {
             stacked: true,
             reverse: false,
           }}
+          curve="linear"
+          colors={{ scheme: "nivo" }}
           theme={{
             fontSize: "12px",
             textColor: "#aaa",
@@ -51,7 +53,7 @@ function OverviewChart({ isDashboard = false, view }) {
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
-            legend: "transportation",
+            legend: "month",
             legendOffset: 36,
             legendPosition: "middle",
           }}
