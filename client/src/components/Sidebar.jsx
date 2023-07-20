@@ -105,12 +105,21 @@ const Sidebar = ({ isOpen }) => {
         </List>
 
         <Divider />
+        <Typography px={3} mt={2} sx={{ fontSize: 15 }}>
+          Management
+        </Typography>
         <List>
-          {["All mail", "Trash", "Spam"].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>hello </ListItemIcon>
-                <ListItemText primary={text} />
+          {[
+            { icon: <ArticleIcon />, text: "Admins" },
+            { icon: <TodayIcon />, text: "Performance" },
+           
+          ].map((item, index) => (
+            <ListItem key={index} disablePadding>
+              <ListItemButton
+                onClick={() => navigete("/" + item.text.toLocaleLowerCase())}
+              >
+                <IconButton>{item.icon}</IconButton>
+                <ListItemText primary={item.text} />
               </ListItemButton>
             </ListItem>
           ))}

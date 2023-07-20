@@ -1,33 +1,12 @@
-import {
-  Box,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  Typography,
-} from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { ResponsiveLine } from "@nivo/line";
-import React, { useMemo } from "react";
+import React from "react";
 import { useGetSalesQuery } from "redux/api";
 import { useTheme } from "@emotion/react";
 
 function Monthly() {
   const theme = useTheme();
   const { isLoading, isError, data } = useGetSalesQuery();
-  console.log(data);
-  const monthsArr = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "September",
-    "October",
-    "Novebmer",
-    "Decenber",
-  ];
 
   const lineDataSales = data.monthlyData.map(function (item) {
     return {
@@ -62,7 +41,7 @@ function Monthly() {
     return (
       <>
         <Box px={2}>
-          <Typography variant="h2">Mothnly Data</Typography>
+          <Typography variant="h2">Monthly Data</Typography>
         </Box>
         <Box sx={{ width: "100%", height: "75vh" }}>
           <ResponsiveLine

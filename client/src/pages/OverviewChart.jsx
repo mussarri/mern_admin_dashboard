@@ -16,7 +16,7 @@ function OverviewChart({ isDashboard = false, view }) {
         y: view === "sales" ? acc + totalSales : acc + totalUnits,
       };
       lineData.push(row);
-      return acc + totalSales;
+      return view === "sales" ? acc + totalSales : acc + totalUnits;
     }, 0);
     console.log(lineData);
     const totalSales = [

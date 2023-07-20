@@ -6,6 +6,12 @@ const OverallStatSchema = new mongoose.Schema(
     yearlySalesTotal: Number,
     yearlyTotalSoldUnits: Number,
     year: Number,
+    salesByCategory: {
+      shoes: Number,
+      clothing: Number,
+      accessories: Number,
+      misc: Number,
+    },
     monthlyData: [
       {
         month: String,

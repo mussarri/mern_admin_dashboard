@@ -127,7 +127,7 @@ function Daily() {
               axisTop={null}
               axisRight={null}
               axisBottom={{
-                tickSize: 15,
+                tickSize: 5,
                 tickPadding: 0,
                 tickRotation: -30,
                 legendOffset: 10,
