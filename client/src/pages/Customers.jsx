@@ -63,6 +63,7 @@ function Customers() {
             height: "100%",
             width: "100%",
           }}
+          
         >
           <DataGrid
             rows={rows}

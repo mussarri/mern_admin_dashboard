@@ -8,6 +8,8 @@ import "dotenv/config";
 import clientRoutes from "./routes/client.js";
 import salesRoutes from "./routes/sales.js";
 import adminRoutes from "./routes/admin.js";
+import { dataAffiliateStat } from "./data/index.js";
+import AffiliateStat from "./models/AffiliateStat.js";
 
 const __filename = fileURLToPath(import.meta.url);
 
@@ -33,6 +35,8 @@ app.use(cookieParser());
 app.use("/client", clientRoutes);
 app.use("/sales", salesRoutes);
 app.use("/admin", adminRoutes);
+
+
 
 app.listen(4000, () => {
   console.log(`app listening on port ${4000}`);

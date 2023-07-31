@@ -22,14 +22,27 @@ import ArticleIcon from "@mui/icons-material/Article";
 import TodayIcon from "@mui/icons-material/Today";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import ReportIcon from "@mui/icons-material/Report";
-import { useNavigate, Link } from "react-router-dom";
+import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import TrendingUpIcon from "@mui/icons-material/TrendingUp";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 
 const Sidebar = ({ isOpen }) => {
   const theme = useTheme();
   const navigete = useNavigate();
+  const location = useLocation();
 
   return (
-    <Grid item xs={2} style={{ display: isOpen ? "flex" : "none", overflowX: "hidden", overflowY: "scroll", maxHeight: "100vh" }}>
+    <Grid
+      item
+      xs={2}
+      style={{
+        display: isOpen ? "flex" : "none",
+        overflowX: "hidden",
+        overflowY: "scroll",
+        maxHeight: "100vh",
+      }}
+    >
       <Box
         sx={{
           width: "100%",
@@ -61,6 +74,29 @@ const Sidebar = ({ isOpen }) => {
             </Typography>
           </Link>
         </Box>
+        <List>
+          {[{ icon: <DashboardIcon />, text: "Dashboard" }].map(
+            (item, index) => (
+              <ListItem
+                sx={{
+                  background:
+                    location.pathname.slice(1) === item.text.toLocaleLowerCase()
+                      ? theme.palette.background.alt
+                      : "",
+                }}
+                key={index}
+                disablePadding
+              >
+                <ListItemButton
+                  onClick={() => navigete("/" + item.text.toLocaleLowerCase())}
+                >
+                  <IconButton>{item.icon}</IconButton>
+                  <ListItemText primary={item.text} />
+                </ListItemButton>
+              </ListItem>
+            )
+          )}
+        </List>
         <Divider />
         <Typography px={3} mt={2} sx={{ fontSize: 15 }}>
           Client
@@ -72,7 +108,16 @@ const Sidebar = ({ isOpen }) => {
             { icon: <PaidIcon />, text: "Transactions" },
             { icon: <LocationOnIcon />, text: "Geography" },
           ].map((item, index) => (
-            <ListItem key={index} disablePadding>
+            <ListItem
+              key={index}
+              disablePadding
+              sx={{
+                background:
+                  location.pathname.slice(1) === item.text.toLocaleLowerCase()
+                    ? theme.palette.background.alt
+                    : "",
+              }}
+            >
               <ListItemButton
                 onClick={() => navigete("/" + item.text.toLocaleLowerCase())}
               >
@@ -93,7 +138,16 @@ const Sidebar = ({ isOpen }) => {
             { icon: <CalendarMonthIcon />, text: "Monthly" },
             { icon: <ReportIcon />, text: "Breakdown" },
           ].map((item, index) => (
-            <ListItem key={index} disablePadding>
+            <ListItem
+              key={index}
+              disablePadding
+              sx={{
+                background:
+                  location.pathname.slice(1) === item.text.toLocaleLowerCase()
+                    ? theme.palette.background.alt
+                    : "",
+              }}
+            >
               <ListItemButton
                 onClick={() => navigete("/" + item.text.toLocaleLowerCase())}
               >
@@ -110,11 +164,19 @@ const Sidebar = ({ isOpen }) => {
         </Typography>
         <List>
           {[
-            { icon: <ArticleIcon />, text: "Admins" },
-            { icon: <TodayIcon />, text: "Performance" },
-           
+            { icon: <AdminPanelSettingsIcon />, text: "Admins" },
+            { icon: <TrendingUpIcon />, text: "Performance" },
           ].map((item, index) => (
-            <ListItem key={index} disablePadding>
+            <ListItem
+              key={index}
+              disablePadding
+              sx={{
+                background:
+                  location.pathname.slice(1) === item.text.toLocaleLowerCase()
+                    ? theme.palette.background.alt
+                    : "",
+              }}
+            >
               <ListItemButton
                 onClick={() => navigete("/" + item.text.toLocaleLowerCase())}
               >

@@ -3,6 +3,7 @@ import User from "../models/User.js";
 import ProductStat from "../models/ProductStat.js";
 import Transaction from "../models/Transaction.js";
 import getCountryISO3 from "country-iso-2-to-3";
+import OverallStat from "../models/OverallStat.js";
 
 export const getCustomerById = async (req, res) => {
   try {
@@ -74,6 +75,40 @@ export const getLocations = async (req, res) => {
       value: data.count,
     }));
     res.status(200).json(locationData);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
+export const getDashboardStats = async (req, res) => {
+  try {
+    const currentMonth = "March";
+    const currentYear = 2021;
+    const currentDay = "2021-03-18";
+
+    const lastTransactions = await Transaction.find()
+      .sort({ createdOn: -1 })
+      .limit(50);
+
+    const overallStats = await OverallStat.find({ year: currentYear });
+
+    const { monthlyData, dailyData, totalCustomers, salesByCategory } =
+      overallStats[0];
+
+    const currentMonthStats = monthlyData.find(
+      ({ month }) => month === currentMonth
+    );
+    const currentDayStats = dailyData.find((item, index) => index === 108);
+
+
+    res.status(200).json({
+      currentDayStats,
+      salesByCategory,
+      totalCustomers,
+      currentMonthStats,
+      lastTransactions,
+      dailyData,
+    });
   } catch (error) {
     res.status(400).json({ message: error.message });
   }

@@ -61,7 +61,6 @@ function OverviewChart({ isDashboard = false, view }) {
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
-            legend: "count",
             legendOffset: -40,
             legendPosition: "middle",
           }}

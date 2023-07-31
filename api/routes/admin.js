@@ -1,9 +1,9 @@
 import express from "express";
-import { getAdmins } from "../controllers/admin.js";
+import { getAdmins, getUserPerformance } from "../controllers/admin.js";
 
 const router = express.Router();
 
 router.get("/admins", getAdmins);
-router.get("/performance", getAdmins);
+router.get("/performance/:id", getUserPerformance);
 
 export default router;
