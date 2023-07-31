@@ -24,7 +24,7 @@ mongoose.connect(process.env.MONGO_URL, {
 mongoose.connection.on("open", () => console.log("Connected to db"));
 
 const corsOptions = {
-  origin: "http://localhost:3000", //
+  origin: process.env.FRONTEND_URL, //
   credentials: true,
 };
 
