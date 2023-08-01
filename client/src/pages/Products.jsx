@@ -77,7 +77,7 @@ function Products() {
         </Box>
         <Grid container rowGap={3}>
           {sortedData.map((product, index) => (
-            <Grid item xs={3} p={1}>
+            <Grid item xs={6} md={4} lg={3} p={1}>
               <Card product={product} theme={theme} />
             </Grid>
           ))}

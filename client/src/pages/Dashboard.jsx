@@ -1,4 +1,4 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Typography, useMediaQuery } from "@mui/material";
 import React from "react";
 import { useGetDashboardStatsQuery } from "redux/api";
 import { useTheme } from "@mui/material/styles";
@@ -7,6 +7,7 @@ import ReceiptIcon from "@mui/icons-material/Receipt";
 import OverviewChart from "./OverviewChart.jsx";
 import { DataGrid } from "@mui/x-data-grid";
 import Pie from "./Pie.jsx";
+import DownloadIcon from "@mui/icons-material/Download";
 
 const columns = [
   { field: "_id", headerName: "ID", flex: 1 },
@@ -29,9 +30,12 @@ const columns = [
 ];
 
 function Item({ theme, title, icon, value, description, increase }) {
+  const md = useMediaQuery("(min-width:1000px)");
+  const sm = useMediaQuery("(min-width:800px)");
+  const xs = useMediaQuery("(min-width:500px)");
   return (
     <Box
-      gridColumn="span 2"
+      gridColumn={md ? "span 2" : sm ? "span 3" : "span 6"}
       gridRow="span 1"
       display="flex"
       flexDirection={"column"}
@@ -58,13 +62,23 @@ function Item({ theme, title, icon, value, description, increase }) {
 function Dashboard() {
   const { isLoading, isError, data } = useGetDashboardStatsQuery();
   const theme = useTheme();
+  const xl = useMediaQuery("(min-width:1300px)");
+  const md = useMediaQuery("(min-width:1000px)");
+  const sm = useMediaQuery("(min-width:600px)");
+  const xs = useMediaQuery("(min-width:500px)");
 
   if (isLoading) return <div>Loading</div>;
   if (isError) return <div>Error</div>;
   if (data) {
     return (
       <>
-        <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
           <Box>
             <Typography variant="h1" component="h1">
               Dashboard
@@ -73,7 +87,7 @@ function Dashboard() {
           </Box>
           <Box>
             <Button variant="contained" size="large" color="secondary">
-              Download Reports
+              {sm ? "Download Reports" : <DownloadIcon />}
             </Button>
           </Box>
         </Box>
@@ -101,12 +115,13 @@ function Dashboard() {
             description="Since last month"
           />
           <Box
-            gridColumn="8 span"
+            gridColumn={md ? "span 8" : "span 12"}
             gridRow="span 2"
             sx={{
               height: "100%",
               width: "100%",
               background: theme.palette.background.alt,
+              order: md || 1,
             }}
           >
             <OverviewChart />
@@ -129,7 +144,7 @@ function Dashboard() {
           />
         </Box>
         <Box
-          display="grid"
+          display={md ? "grid" : "block"}
           gridTemplateColumns="repeat(12, 1fr)"
           gridAutoRows="160px"
           gap="20px"
@@ -163,8 +178,13 @@ function Dashboard() {
               />
             </div>
           </Box>
-          <Box gridColumn={"4 span"} gridRow={"2 span"}  >
-            <Pie theme={theme} salesByCategory={data.salesByCategory} />
+          <Box
+            gridColumn={"4 span"}
+            gridRow={"2 span"}
+            height={md ? "100%" : sm ? 600 : xs ? 500 : 350}
+            width={"100%"}
+          >
+            <Pie theme={theme} salesByCategory={data.salesByCategory} xs={xs} />
           </Box>
         </Box>
       </>

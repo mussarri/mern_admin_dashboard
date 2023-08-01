@@ -11,6 +11,7 @@ import {
   Typography,
   IconButton,
   Grid,
+  useMediaQuery,
 } from "@mui/material";
 
 import AdbIcon from "@mui/icons-material/Adb";
@@ -31,13 +32,19 @@ const Sidebar = ({ isOpen }) => {
   const theme = useTheme();
   const navigete = useNavigate();
   const location = useLocation();
-
+  const xl = useMediaQuery("(min-width:1300px)");
   return (
     <Grid
       item
-      xs={2}
+      xs={5}
+      sm={4}
+      lg={2}
       style={{
         display: isOpen ? "flex" : "none",
+        position: xl ? "" : "absolute",
+        width: xl ? "" : 200,
+        zIndex: 2,
+        paddingTop: xl || 70,
         overflowX: "hidden",
         overflowY: "scroll",
         maxHeight: "100vh",

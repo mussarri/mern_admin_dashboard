@@ -1,10 +1,11 @@
 import React from "react";
 import { ResponsiveLine } from "@nivo/line";
 import { useGetSalesQuery } from "redux/api";
-import { Box } from "@mui/material";
+import { Box, useMediaQuery } from "@mui/material";
 
-function OverviewChart({ isDashboard = false, view }) {
+function OverviewChart({ isDashboard = false, view, xl }) {
   const { isLoading, isError, data } = useGetSalesQuery();
+  const sm = useMediaQuery("(min-width:800px)");
 
   if (isLoading) return <div>Loading</div>;
   if (isError) return <div>Error</div>;
@@ -28,10 +29,10 @@ function OverviewChart({ isDashboard = false, view }) {
     ];
 
     return (
-      <Box sx={{ height: "100%", width: "100%" }}>
+      <Box sx={{ height: "100%", width: "100%", minWidth: 700 }}>
         <ResponsiveLine
           data={totalSales}
-          margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
+          margin={{ top: 20, right: xl ? 100 : 50, bottom: 50, left: 60 }}
           xScale={{ type: "point" }}
           yScale={{
             type: "linear",
@@ -50,9 +51,9 @@ function OverviewChart({ isDashboard = false, view }) {
           axisTop={null}
           axisRight={null}
           axisBottom={{
+            tickRotation: sm ? 0 : -48,
             tickSize: 5,
             tickPadding: 5,
-            tickRotation: 0,
             legend: "month",
             legendOffset: 36,
             legendPosition: "middle",
@@ -70,32 +71,36 @@ function OverviewChart({ isDashboard = false, view }) {
           pointBorderColor={{ from: "serieColor" }}
           pointLabelYOffset={-12}
           useMesh
-          legends={[
-            {
-              anchor: "bottom-right",
-              direction: "column",
-              justify: false,
-              translateX: 100,
-              translateY: 0,
-              itemsSpacing: 0,
-              itemDirection: "left-to-right",
-              itemWidth: 80,
-              itemHeight: 20,
-              itemOpacity: 0.75,
-              symbolSize: 12,
-              symbolShape: "circle",
-              symbolBorderColor: "rgba(0, 0, 0, .5)",
-              effects: [
-                {
-                  on: "hover",
-                  style: {
-                    itemBackground: "rgba(0, 0, 0, .03)",
-                    itemOpacity: 1,
+          legends={
+            xl
+              ? [
+                  {
+                    anchor: "bottom-right",
+                    direction: "column",
+                    justify: false,
+                    translateX: 100,
+                    translateY: 0,
+                    itemsSpacing: 0,
+                    itemDirection: "left-to-right",
+                    itemWidth: 80,
+                    itemHeight: 20,
+                    itemOpacity: 0.75,
+                    symbolSize: 12,
+                    symbolShape: "circle",
+                    symbolBorderColor: "rgba(0, 0, 0, .5)",
+                    effects: [
+                      {
+                        on: "hover",
+                        style: {
+                          itemBackground: "rgba(0, 0, 0, .03)",
+                          itemOpacity: 1,
+                        },
+                      },
+                    ],
                   },
-                },
-              ],
-            },
-          ]}
+                ]
+              : []
+          }
         />
       </Box>
     );

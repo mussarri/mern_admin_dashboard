@@ -27,7 +27,7 @@ function Overview() {
           </Select>
         </FormControl>
       </Box>
-      <Box height="75vh">
+      <Box height="75vh" sx={{ overflowX: "scroll" }}>
         <OverviewChart view={view} />
       </Box>
     </>

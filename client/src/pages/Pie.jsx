@@ -1,3 +1,4 @@
+import { useMediaQuery } from "@mui/material";
 import { ResponsivePie } from "@nivo/pie";
 import React from "react";
 
@@ -11,6 +12,9 @@ function Pie({ theme, salesByCategory }) {
       value: category[1],
     };
   });
+  const xl = useMediaQuery("(min-width:1300px)");
+  const md = useMediaQuery("(min-width:1000px)");
+  const xs = useMediaQuery("(min-width:500px)");
   return (
     <ResponsivePie
       data={formattedData}
@@ -25,6 +29,7 @@ function Pie({ theme, salesByCategory }) {
         modifiers: [["darker", 0.2]],
       }}
       colors={{ scheme: "accent" }}
+      enableArcLinkLabels={xl ? true : md ? false : xs ? true : false}
       arcLinkLabelsSkipAngle={10}
       arcLinkLabelsTextColor={theme.palette.primary.main}
       arcLinkLabelsThickness={2}

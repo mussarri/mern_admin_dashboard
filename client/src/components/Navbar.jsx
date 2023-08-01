@@ -98,7 +98,7 @@ function ResponsiveAppBar({ isOpen, setIsOpen }) {
             </Search>
           </Box>
 
-          <Box >
+          <Box>
             <IconButton onClick={() => dispatch(setMode())}>
               {theme.palette.mode === "dark" ? (
                 <DarkModeOutlined />

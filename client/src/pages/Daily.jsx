@@ -103,8 +103,8 @@ function Daily() {
             </Select>
           </FormControl>
         </Box>
-        <Box sx={{ overflowY: "scroll" }}>
-          <Box sx={{ width: "150%", height: "75vh" }}>
+        <Box sx={{ overflowY: "scroll", overflowX: "scroll" }}>
+          <Box sx={{ width: "150%", height: "75vh", minWidth: 1000 }}>
             <ResponsiveLine
               sx={{ width: 100 }}
               data={formattedData}
