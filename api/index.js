@@ -8,8 +8,6 @@ import "dotenv/config";
 import clientRoutes from "./routes/client.js";
 import salesRoutes from "./routes/sales.js";
 import adminRoutes from "./routes/admin.js";
-import { dataAffiliateStat } from "./data/index.js";
-import AffiliateStat from "./models/AffiliateStat.js";
 
 const __filename = fileURLToPath(import.meta.url);
 
@@ -24,7 +22,7 @@ mongoose.connect(process.env.MONGO_URL, {
 mongoose.connection.on("open", () => console.log("Connected to db"));
 
 const corsOptions = {
-  origin: "http://localhost:3000", //
+  origin: process.env.FRONTEND_URL, //
   credentials: true,
 };
 
