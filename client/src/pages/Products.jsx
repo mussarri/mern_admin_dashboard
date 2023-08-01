@@ -36,7 +36,7 @@ function Products() {
         <Skeleton width={"10%"} height={40} sx={{ marginLeft: 2 }} />
         <Grid container rowGap={3}>
           {loading.map(() => (
-            <Grid item xs={3} p={2}>
+            <Grid item xs={12} sm={6} md={4} lg={3} p={2}>
               <Skeleton variant="rectangular" height={40} />
               <Skeleton width={"60%"} />
               <Skeleton variant="text" sx={{ fontSize: "1rem" }} />
@@ -77,7 +77,7 @@ function Products() {
         </Box>
         <Grid container rowGap={3}>
           {sortedData.map((product, index) => (
-            <Grid item xs={6} md={4} lg={3} p={1}>
+            <Grid item xs={12} sm={6} md={4} lg={3} p={1}>
               <Card product={product} theme={theme} />
             </Grid>
           ))}

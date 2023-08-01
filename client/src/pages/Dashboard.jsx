@@ -121,6 +121,7 @@ function Dashboard() {
               height: "100%",
               width: "100%",
               background: theme.palette.background.alt,
+              overflow: "scroll",
               order: md || 1,
             }}
           >
