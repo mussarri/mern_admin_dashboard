@@ -11,7 +11,7 @@ export default function DataTable({ rows, columns, setPage , perPage}) {
     >
       <DataGrid
         rows={rows}
-        columns={columns}
+        columns={[...columns, { field: 'rating', sortable: false }]} 
         pagination
         onPaginationModelChange={(e) => setPage(e.page)}
         sx={{

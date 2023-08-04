@@ -11,7 +11,7 @@ export default function DataTable({ rows, columns, setPage }) {
     >
       <DataGrid
         rows={rows}
-        columns={columns}
+        columns={[...columns, { field: 'rating', sortable: false }]} 
         onPaginationModelChange={(e) => setPage(e.page)}
         sx={{
           "& .MuiDataGrid-selectedRowCount": {
